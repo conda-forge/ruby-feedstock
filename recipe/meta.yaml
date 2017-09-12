@@ -1,7 +1,7 @@
 {% set name = "ruby" %}
 {% set major_minor = "2.3" %}
 {% set version = "2.3.3" %}
-{% set sha256 = "241408C8C555B258846368830A06146E4849A1D58DCAF6B14A3B6A73058115B7" %}
+{% set sha256 = "241408c8c555b258846368830a06146e4849a1d58dcaf6b14a3b6a73058115b7" %}
 
 package:
   name: {{ name|lower }}
