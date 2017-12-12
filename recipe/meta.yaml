@@ -8,12 +8,11 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
   track_features:
     - rb{{ version | replace(".", "") }}
@@ -25,16 +24,16 @@ requirements:
     - cmake
     - openssl 1.0.*
     - zlib 1.2.11
-    - readline 6.2*
-    - tk 8.5.*
+    - readline 7.0
+    - tk 8.6.*
     - yaml
     - gettext  # [osx]
     - gmp 6.1.*
   run:
     - openssl 1.0.*
     - zlib 1.2.11
-    - readline 6.2*
-    - tk 8.5.*
+    - readline 7.0
+    - tk 8.6.*
     - yaml
     - gettext  # [osx]
     - gmp 6.1.*
