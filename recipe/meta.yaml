@@ -12,31 +12,34 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
   track_features:
     - rb{{ version | replace(".", "") }}
 
 requirements:
   build:
-    - toolchain3
     - make
     - cmake
-    - openssl 1.0.*
-    - zlib 1.2.11
-    - readline 7.0
-    - tk 8.6.*
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - toolchain3
+    - openssl
+    - zlib
+    - readline
+    - tk
     - yaml
     - gettext  # [osx]
-    - gmp 6.1.*
+    - gmp
   run:
-    - openssl 1.0.*
-    - zlib 1.2.11
-    - readline 7.0
-    - tk 8.6.*
+    - openssl
+    - zlib
+    - readline
+    - tk
     - yaml
     - gettext  # [osx]
-    - gmp 6.1.*
+    - gmp
 
 test:
   commands:
