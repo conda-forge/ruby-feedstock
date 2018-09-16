@@ -24,7 +24,6 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - toolchain3
     - openssl
     - zlib
     - readline
