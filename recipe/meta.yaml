@@ -1,7 +1,7 @@
 {% set name = "ruby" %}
 {% set major_minor = "2.4" %}
-{% set version = "2.4.4" %}
-{% set sha256 = "254f1c1a79e4cc814d1e7320bc5bdd995dc57e08727d30a767664619a9c8ae5a" %}
+{% set version = "2.4.5" %}
+{% set sha256 = "6737741ae6ffa61174c8a3dcdd8ba92bc38827827ab1d7ea1ec78bc3cefc5198" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1001
+  number: 1000
   skip: True  # [win]
   track_features:
     - rb{{ version | replace(".", "") }}
