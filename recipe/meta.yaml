@@ -39,6 +39,8 @@ requirements:
     - yaml
     - gettext  # [osx]
     - gmp
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
 test:
   commands:
