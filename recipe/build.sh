@@ -10,4 +10,4 @@ make -j ${CPU_COUNT}
 make install
 
 rbconfig=`find $PREFIX -type f -name 'rbconfig.rb'`
-$(SRC_DIR)/rbconfig.sed -i $rbconfig
+./rbconfig.sed -i $rbconfig
