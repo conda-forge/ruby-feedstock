@@ -41,7 +41,7 @@ requirements:
     - gmp
 
 test:
-  requirements:
+  requires:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   commands:
