@@ -44,6 +44,7 @@ test:
   requires:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make
   commands:
     - ruby --version
     - gem --version
