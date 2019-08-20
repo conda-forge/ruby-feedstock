@@ -1,6 +1,6 @@
 {% set name = "ruby" %}
-{% set major_minor = "2.4" %}
 {% set version = "2.4.5" %}
+{% set major_minor = "2.4" %}
 
 package:
   name: {{ name|lower }}
