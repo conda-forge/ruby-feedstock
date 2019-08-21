@@ -1,7 +1,6 @@
 {% set name = "ruby" %}
-{% set major_minor = "2.4" %}
 {% set version = "2.4.5" %}
-{% set sha256 = "6737741ae6ffa61174c8a3dcdd8ba92bc38827827ab1d7ea1ec78bc3cefc5198" %}
+{% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
   name: {{ name|lower }}
@@ -9,10 +8,10 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 6737741ae6ffa61174c8a3dcdd8ba92bc38827827ab1d7ea1ec78bc3cefc5198
 
 build:
-  number: 1002
+  number: 1003
   skip: True  # [win]
   track_features:
     - rb{{ version | replace(".", "") }}
@@ -21,6 +20,7 @@ requirements:
   build:
     - make
     - cmake
+    - sed
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -41,12 +41,18 @@ requirements:
     - gmp
 
 test:
+  requires:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
   commands:
     - ruby --version
     - gem --version
     - ruby -e 'puts "Hi, from Ruby!"'
     - ruby -r rubygems -e 'puts "Has gems."; exit 0'
     - ruby -r openssl -r readline -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+    # Tests it can build libraries with native dependencies
+    - gem install hitimes
 
 about:
   home: https://www.ruby-lang.org/
