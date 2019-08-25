@@ -1,0 +1,43 @@
+diff --git a/Makefile.in b/Makefile.in
+index b0f7975cc5..6b3785e403 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -166,7 +166,7 @@ RMDIRS        = @RMDIRS@
+ RMALL         = @RMALL@
+ NM            = @NM@
+ AR            = @AR@
+-ARFLAGS       = @ARFLAGS@$(empty)
++ARFLAGS       = @ARFLAGS@
+ RANLIB        = @RANLIB@
+ AS            = @AS@
+ ASFLAGS       = @ASFLAGS@ $(INCFLAGS)
+diff --git a/configure.in b/configure.in
+index 08e109317f..53cdbb539a 100644
+--- a/configure.in
++++ b/configure.in
+@@ -581,21 +581,17 @@ AS_CASE(["$target_cpu-$target_os"], [[i[3-6]86*]], [
+ 		 CFLAGS="$save_CFLAGS"
+ 	 ])])
+ 
+-AS_CASE(["$target_os"], [darwin*], [
+-  ac_cv_prog_ac_ct_RANLIB=:
+-  ac_cv_prog_ac_ct_AR='libtool -static'
+-  rb_cv_arflags='-no_warning_for_no_symbols -o'
+-])
+ AC_CHECK_TOOL(RANLIB, ranlib, :)
+ AC_CHECK_TOOL(AR, ar)
+ AS_IF([test -z "$AR"], [
+   AC_CHECK_PROGS(AR, aal, ar)
+ ])
+-AC_CACHE_CHECK([for $AR flags], [rb_cv_arflags], [
++AC_CACHE_CHECK([for $AR D option], [rb_cv_ar_D_option], [
+     AS_IF([$AR rcD conftest.a > /dev/null 2>&1 && rm conftest.a],
+-	[rb_cv_arflags=rcD], [rb_cv_arflags=rcu])
++	[rb_cv_ar_D_option=yes], [rb_cv_ar_D_option=no])
+ ])
+-AC_SUBST(ARFLAGS, ["$rb_cv_arflags "])
++AS_IF([test "$rb_cv_ar_D_option" = yes], [ARFLAGS='rcD '], [ARFLAGS='rcu '])
++AC_SUBST(ARFLAGS)
+ 
+ AC_CHECK_TOOL(AS, as)
+ ASFLAGS=$ASFLAGS

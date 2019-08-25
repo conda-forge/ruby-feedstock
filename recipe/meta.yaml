@@ -9,6 +9,13 @@ package:
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
   sha256: 577fd3795f22b8d91c1d4e6733637b0394d4082db659fccf224c774a2b1c82fb
+  patches:
+    # These patches undo the libtool ARFLAGS modification in 2.6.x
+    # The hashes refere to the commits in the ruby/ruby repo
+    # https://github.com/ruby/ruby/commit/2627c19d82252f2bb571f6bcb44e359cacefa92b
+    # https://github.com/ruby/ruby/commit/bf87195ea37d9607e21e50a1e7df63a2cdd6451f
+    - 2627c19d82252f2bb571f6bcb44e359cacefa92b.patch
+    - bf87195ea37d9607e21e50a1e7df63a2cdd6451f.patch
 
 build:
   number: 0
