@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "2.4.5" %}
+{% set version = "2.5.5" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 6737741ae6ffa61174c8a3dcdd8ba92bc38827827ab1d7ea1ec78bc3cefc5198
+  sha256: 28a945fdf340e6ba04fc890b98648342e3cccfd6d223a48f3810572f11b2514c
 
 build:
-  number: 1003
+  number: 0
   skip: True  # [win]
   track_features:
     - rb{{ version | replace(".", "") }}
