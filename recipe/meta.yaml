@@ -17,7 +17,7 @@ source:
     - undo-libtool.patch  # [osx]
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
   track_features:
     - rb{{ major_minor | replace(".", "") }}
