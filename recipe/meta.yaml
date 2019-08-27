@@ -30,7 +30,6 @@ requirements:
     - {{ compiler('cxx') }}
     - autoconf
     - automake
-    - cmake
     - make
   host:
     - openssl
