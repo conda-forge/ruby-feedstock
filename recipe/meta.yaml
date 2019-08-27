@@ -54,14 +54,21 @@ test:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make
+  files:
+    - native/hello.c
+    - native/config.rb
   commands:
     - ruby --version
     - gem --version
     - ruby -e 'puts "Hi, from Ruby!"'
     - ruby -r rubygems -e 'puts "Has gems."; exit 0'
     - ruby -r openssl -r readline -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+
     # Tests it can build libraries with native dependencies
-    - gem install hitimes
+    - cd native
+    - ruby config.rb
+    - make 
+    - ruby -r ./hello.so -e 'hello'
 
 about:
   home: https://www.ruby-lang.org/
