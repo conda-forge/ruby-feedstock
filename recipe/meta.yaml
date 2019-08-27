@@ -23,6 +23,9 @@ build:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
+  ignore_run_exports:
+    # We need CXX during build time to generate rbconfig.rb
+    - libstdcxx-ng
 
 requirements:
   build:
@@ -32,7 +35,7 @@ requirements:
     - automake
     - make
   host:
-    - gdbm
+    - gdbm  # [x86]
     - gettext  # [osx]
     - gmp
     - libffi
