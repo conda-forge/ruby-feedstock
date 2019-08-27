@@ -1,0 +1,9 @@
+gdbm:
+  - 1.18
+yaml:
+  - 0.1.7
+pin_run_as_build:
+  yaml:
+    max_pin: x.x
+  gdbm:
+    max_pin: x.x
