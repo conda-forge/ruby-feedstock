@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "2.5.5" %}
+{% set version = "2.6.3" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,58 +8,75 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 28a945fdf340e6ba04fc890b98648342e3cccfd6d223a48f3810572f11b2514c
+  sha256: 577fd3795f22b8d91c1d4e6733637b0394d4082db659fccf224c774a2b1c82fb
+  patches:
+    # This patch undoes the libtool ARFLAGS modification in 2.6.x
+    # It was created by undoing the following two commits from ruby/ruby
+    #   - https://github.com/ruby/ruby/commit/2627c19d82252f2bb571f6bcb44e359cacefa92b
+    #   - https://github.com/ruby/ruby/commit/bf87195ea37d9607e21e50a1e7df63a2cdd6451f
+    - undo-libtool.patch  # [osx]
+
+    # Patches/work-a-rounds for passing make check
+    - add-pragma-unused-variable.patch
+    - disable-backtrace-with-lines.patch
 
 build:
-  number: 1
+  number: 0
   skip: True  # [win]
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
+  ignore_run_exports:
+    # We need CXX during build time to generate rbconfig.rb
+    - libstdcxx-ng
 
 requirements:
   build:
-    - make
-    - cmake
-    - sed
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - make
+    - pkg-config
   host:
-    - openssl
-    - zlib
-    - readline
-    - tk
-    - yaml
+    - gdbm  # [x86]
     - gettext  # [osx]
     - gmp
+    - libffi
+    - ncurses
+    - openssl
+    - readline
+    - yaml
+    - zlib
   run:
-    - openssl
-    - zlib
-    - readline
-    - tk
-    - yaml
     - gettext  # [osx]
-    - gmp
 
 test:
   requires:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make
+  files:
+    - native/hello.c
+    - native/config.rb
   commands:
     - ruby --version
     - gem --version
     - ruby -e 'puts "Hi, from Ruby!"'
     - ruby -r rubygems -e 'puts "Has gems."; exit 0'
-    - ruby -r openssl -r readline -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+    - ruby -r fiddle -r openssl -r readline -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+
     # Tests it can build libraries with native dependencies
-    - gem install hitimes
+    - cd native
+    - ruby config.rb
+    - make 
+    - ruby -r ./hello.so -e 'hello'
 
 about:
   home: https://www.ruby-lang.org/
-  license: GPL v2
-  license_family: GPL
+  license: BSD-2-Clause
+  license_family: BSD
   license_file: COPYING
   summary: 'A dynamic, open source programming language with a focus on simplicity and productivity.'
   description: |
@@ -72,3 +89,4 @@ extra:
   recipe-maintainers:
     - scopatz
     - jimmynguyc
+    - sodre

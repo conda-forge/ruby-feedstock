@@ -1,0 +1,20 @@
+diff --git a/include/ruby/ruby.h b/include/ruby/ruby.h
+index 576b951..8587253 100644
+--- a/include/ruby/ruby.h
++++ b/include/ruby/ruby.h
+@@ -2182,12 +2182,15 @@ rb_array_ptr_use_start(VALUE a, int allow_transient)
+ }
+ 
+ /* internal function. do not use this function */
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wunused-parameter"
+ static inline void
+ rb_array_ptr_use_end(VALUE a, int allow_transient)
+ {
+     void rb_ary_ptr_use_end(VALUE a);
+     rb_ary_ptr_use_end(a);
+ }
++#pragma GCC diagnostic pop
+ 
+ #if defined(EXTLIB) && defined(USE_DLN_A_OUT)
+ /* hook for external modules */
