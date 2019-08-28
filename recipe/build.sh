@@ -28,5 +28,7 @@ autoconf
   --with-openssl-dir="$PREFIX" \
   --with-readline-dir="$PREFIX" \
   --with-zlib-dir="$PREFIX"
+
 make -j ${CPU_COUNT}
+make check
 make install
