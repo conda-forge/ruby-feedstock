@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -x
+set -eufx
 
 export CC=$(basename $CC)
 export CPP=$(basename $CPP)
@@ -28,6 +27,8 @@ autoconf
   --with-openssl-dir="$PREFIX" \
   --with-readline-dir="$PREFIX" \
   --with-zlib-dir="$PREFIX"
+
+[[ "$target_platform" == "win-64" ]] && patch_libtool
 
 make -j ${CPU_COUNT}
 # make check works locally on Linux, but not on CI Nodes, issue seems related to IPv6 and closed ports
