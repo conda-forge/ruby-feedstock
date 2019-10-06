@@ -3,7 +3,7 @@ About ruby
 
 Home: https://www.ruby-lang.org/
 
-Package license: GPL v2
+Package license: BSD-2-Clause
 
 Feedstock license: BSD 3-Clause
 
@@ -173,4 +173,5 @@ Feedstock Maintainers
 
 * [@jimmynguyc](https://github.com/jimmynguyc/)
 * [@scopatz](https://github.com/scopatz/)
+* [@sodre](https://github.com/sodre/)
 

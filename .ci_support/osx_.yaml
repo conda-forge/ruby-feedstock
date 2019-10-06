@@ -14,26 +14,30 @@ cxx_compiler_version:
 - '4'
 gmp:
 - '6'
+libffi:
+- '3.2'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
 - '10.9'
+ncurses:
+- '6.1'
 openssl:
 - 1.1.1a
 pin_run_as_build:
   gmp:
     max_pin: x
+  libffi:
+    max_pin: x.x
+  ncurses:
+    max_pin: x.x
   openssl:
     max_pin: x.x.x
   readline:
     max_pin: x
-  tk:
-    max_pin: x.x
   zlib:
     max_pin: x.x
 readline:
 - '8.0'
-tk:
-- '8.6'
 zlib:
 - '1.2'
