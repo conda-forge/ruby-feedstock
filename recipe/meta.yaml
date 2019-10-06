@@ -35,17 +35,23 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - autotools_clang_conda  # [win]
     - autoconf
     - automake
     - make
     - pkg-config
+
+    - autotools_clang_conda  # [win]
+    - m2-autoconf  # [win]
+    - m2-automake  # [win]
+    - m2-make  # [win]
+    - m2-pkg-config  # [win]
   host:
     - gdbm  # [x86]
     - gettext  # [osx]
     - gmp
     - libffi
     - ncurses
+    - m2-ncurses  # [win]
     - openssl
     - readline
     - yaml
