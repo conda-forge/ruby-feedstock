@@ -18,7 +18,7 @@ source:
 
     # Patches/work-a-rounds for passing make check
     # - add-pragma-unused-variable.patch
-    - disable-backtrace-with-lines.patch
+    # - disable-backtrace-with-lines.patch
 
 build:
   number: 0
