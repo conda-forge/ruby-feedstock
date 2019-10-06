@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "2.6.5" %}
+{% set version = "2.5.7" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d
+  sha256: 0b2d0d5e3451b6ab454f81b1bfca007407c0548dea403f1eba2e429da4add6d4
   patches:
     # This patch undoes the libtool ARFLAGS modification in 2.6.x
     # It was created by undoing the following two commits from ruby/ruby
