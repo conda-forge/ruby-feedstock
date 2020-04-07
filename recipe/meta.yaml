@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "2.6.5" %}
+{% set version = "2.7.1" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d
+  sha256: d418483bdd0000576c1370571121a6eb24582116db0b7bb2005e90e250eae418
   patches:
     # This patch undoes the libtool ARFLAGS modification in 2.6.x
     # It was created by undoing the following two commits from ruby/ruby
@@ -22,7 +22,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [win]
+  skip: true  # [win]
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
@@ -70,7 +70,7 @@ test:
     # Tests it can build libraries with native dependencies
     - cd native
     - ruby config.rb
-    - make 
+    - make
     - ruby -r ./hello.so -e 'hello'
 
 about:
@@ -78,7 +78,7 @@ about:
   license: BSD-2-Clause
   license_family: BSD
   license_file: COPYING
-  summary: 'A dynamic, open source programming language with a focus on simplicity and productivity.'
+  summary: A dynamic, open source programming language with a focus on simplicity and productivity.
   description: |
     A dynamic, open source programming language with a focus on simplicity and productivity.
     It has an elegant syntax that is natural to read and easy to write.
