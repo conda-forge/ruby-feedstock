@@ -10,12 +10,6 @@ source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
   sha256: d418483bdd0000576c1370571121a6eb24582116db0b7bb2005e90e250eae418
   patches:
-    # This patch undoes the libtool ARFLAGS modification in 2.6.x
-    # It was created by undoing the following two commits from ruby/ruby
-    #   - https://github.com/ruby/ruby/commit/2627c19d82252f2bb571f6bcb44e359cacefa92b
-    #   - https://github.com/ruby/ruby/commit/bf87195ea37d9607e21e50a1e7df63a2cdd6451f
-    - undo-libtool.patch  # [osx]
-
     # Patches/work-a-rounds for passing make check
     #- add-pragma-unused-variable.patch
     - disable-backtrace-with-lines.patch

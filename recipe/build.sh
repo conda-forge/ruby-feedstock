@@ -16,6 +16,10 @@ export LD=$(basename $LD)
 # Remove vendored libffi
 rm -rf ext/fiddle/libffi-3.2.1
 
+if [[ "$(uname)" == "Darwin" ]]; then
+    ln -sfv "$(which $LIBTOOL)" "$BUILD_PREFIX/bin/libtool"
+fi
+
 autoconf
 
 ./configure \
