@@ -17,7 +17,9 @@ export LD=$(basename $LD)
 rm -rf ext/fiddle/libffi-3.2.1
 
 if [[ "$(uname)" == "Darwin" ]]; then
+    # ensure that osx-64 uses libtool instead of ar
     ln -sfv "$(which $LIBTOOL)" "$BUILD_PREFIX/bin/libtool"
+    unset AR
 fi
 
 autoconf
