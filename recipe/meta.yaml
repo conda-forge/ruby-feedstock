@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "2.6.6" %}
+{% set version = "2.7.1" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
