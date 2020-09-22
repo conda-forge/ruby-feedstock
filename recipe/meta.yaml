@@ -22,7 +22,6 @@ source:
 
 build:
   number: 0
-  skip: True  # [win]
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
@@ -35,18 +34,18 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - autoconf
-    - automake
-    - make
-    - pkg-config
+    - autoconf    # [unix]
+    - automake    # [unix]
+    - make        # [unix]
+    - pkg-config  # [unix]
   host:
-    - gdbm  # [x86]
-    - gettext  # [osx]
-    - gmp
+    # - gdbm        # [x86]
+    - gettext     # [osx]
+    # - gmp
     - libffi
-    - ncurses
+    # - ncurses
     - openssl
-    - readline
+    # - readline
     - yaml
     - zlib
   run:
