@@ -1,4 +1,8 @@
-if [ ! -z "$ZSH_VERSION" ]; then
+if [ "$ZSH_VERSION" != "" ]; then
+    unset GEM_HOME
+    path=(${path[@]:#"$CONDA_PREFIX/Library/share/rubygems/bin"})
+    path=(${path[@]:#"$CONDA_PREFIX/share/rubygems/bin"})
+else
     # Taken from http://www.linuxfromscratch.org/blfs/view/svn/postlfs/profile.html
     # Functions to help us manage paths.  Second argument is the name of the
     # path variable to be modified (default: PATH)
@@ -14,11 +18,7 @@ if [ ! -z "$ZSH_VERSION" ]; then
             done
             export $PATHVARIABLE="$NEWPATH"
     }
-    unset $GEM_HOME
+    unset GEM_HOME
     pathremove "$CONDA_PREFIX/Library/share/rubygems/bin"
     pathremove "$CONDA_PREFIX/share/rubygems/bin"
-else
-    unset $GEM_HOME
-    path=(${path[@]:#"$CONDA_PREFIX/Library/share/rubygems/bin"})
-    path=(${path[@]:#"$CONDA_PREFIX/share/rubygems/bin"})
 fi
