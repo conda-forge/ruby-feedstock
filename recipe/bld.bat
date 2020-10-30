@@ -31,4 +31,8 @@ for %%F in (activate deactivate) DO (
     :: Copy unix shell activation scripts, needed by Windows Bash users
     copy %RECIPE_DIR%\%%F.sh %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.sh
     if %errorlevel% neq 0 exit /b %errorlevel%
+
+    :: Copy unix shell activation scripts, needed by Windows Bash users
+    copy %RECIPE_DIR%\%%F.ps1 %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.ps1
+    if %errorlevel% neq 0 exit /b %errorlevel%
 )
