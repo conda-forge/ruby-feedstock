@@ -1,0 +1,28 @@
+From 49bb2e64ccca130f8e1a0b6ad36d442c1ad44ed7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E5=8D=9C=E9=83=A8=E6=98=8C=E5=B9=B3?=
+ <shyouhei@ruby-lang.org>
+Date: Sat, 15 Feb 2020 18:30:53 +0900
+Subject: [PATCH] avoid defining inline
+
+Recent (since 2012 maybe?) MSVC ships a header named xkeycheck.h, which
+(kindly!) aborts compilation on redefinition of C++ keywords.  Let's not
+define this in case of C++.
+---
+ win32/Makefile.sub | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/win32/Makefile.sub b/win32/Makefile.sub
+index ea5789fd3e9d..bd350dcd3175 100644
+--- a/win32/Makefile.sub
++++ b/win32/Makefile.sub
+@@ -860,8 +860,8 @@ $(CONFIG_H): $(MKFILES) $(srcdir)/win32/Makefile.sub $(win_srcdir)/Makefile.sub
+ #define RUBY_SETJMP(env) _setjmp(env)
+ #define RUBY_LONGJMP(env,val) longjmp(env,val)
+ #define RUBY_JMP_BUF jmp_buf
+-#define inline __inline
+ #ifndef __cplusplus
++#define inline __inline
+ !if $(MSC_VER) >= 1800
+ #define restrict __restrict
+ !else
+ 
