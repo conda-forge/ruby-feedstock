@@ -13,9 +13,10 @@ source:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
     - fix-inline-redefinition-msvc.patch  # [win]
+    - fix-isinf-redefinition-msvc.patch  # [win]
 
 build:
-  number: 1
+  number: 2
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
