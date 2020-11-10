@@ -1,0 +1,25 @@
+From 657c28576cbe881afee43b630e2c359ebe471352 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Tue, 10 Nov 2020 23:02:43 +0100
+Subject: [PATCH] Define HAVE_ISINF for Visual Studio >= 2013
+
+isinf is defined in Visual Studio since version 2013.
+---
+ win32/Makefile.sub | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/win32/Makefile.sub b/win32/Makefile.sub
+index 9686d1caaa77..31dc25f3d33f 100644
+--- a/win32/Makefile.sub
++++ b/win32/Makefile.sub
+@@ -817,6 +817,9 @@ $(CONFIG_H): $(MKFILES) $(srcdir)/win32/Makefile.sub $(win_srcdir)/Makefile.sub
+ #define HAVE_STRCHR 1
+ #define HAVE_STRSTR 1
+ #define HAVE_FLOCK 1
++!if $(MSC_VER) >= 1800
++#define HAVE_ISINF 1
++!endif
+ #define HAVE_ISNAN 1
+ #define HAVE_FINITE 1
+ !if $(RT_VER) >= 120
+ 
