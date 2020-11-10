@@ -5,9 +5,13 @@ Home: https://www.ruby-lang.org/
 
 Package license: BSD-2-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ruby-feedstock/blob/master/LICENSE.txt)
 
 Summary: A dynamic, open source programming language with a focus on simplicity and productivity.
+
+Development: https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/
+
+Documentation: https://www.ruby-lang.org/en/documentation/
 
 A dynamic, open source programming language with a focus on simplicity and productivity.
 It has an elegant syntax that is natural to read and easy to write.
