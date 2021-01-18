@@ -29,7 +29,11 @@ autoconf
   --with-readline-dir="$PREFIX" \
   --with-zlib-dir="$PREFIX"
 
-make -j ${CPU_COUNT}
+if [[ "${target_platform}" == osx-* ]]; then
+    make -j${CPU_COUNT} V=1 ARFLAGS='-rcs'
+else
+    make -j${CPU_COUNT} V=1
+fi
 # make check works locally on Linux, but not on CI Nodes, issue seems related to IPv6 and closed ports
 # make check
 make install
