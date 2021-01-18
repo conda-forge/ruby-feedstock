@@ -187,4 +187,5 @@ Feedstock Maintainers
 * [@scopatz](https://github.com/scopatz/)
 * [@sodre](https://github.com/sodre/)
 * [@wolfv](https://github.com/wolfv/)
+* [@xhochy](https://github.com/xhochy/)
 
