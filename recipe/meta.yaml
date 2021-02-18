@@ -11,9 +11,9 @@ source:
   sha256: a13ed141a1c18eb967aac1e33f4d6ad5f21be1ac543c344e0d6feeee54af8e28
   patches:
     # Patches/work-arounds for passing make check
-    - disable-backtrace-with-lines.patch
-    - fix-inline-redefinition-msvc.patch  # [win]
-    - fix-isinf-redefinition-msvc.patch  # [win]
+    # - disable-backtrace-with-lines.patch
+    # - fix-inline-redefinition-msvc.patch  # [win]
+    # - fix-isinf-redefinition-msvc.patch  # [win]
 
 build:
   number: 0
