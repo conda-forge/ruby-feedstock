@@ -1,6 +1,5 @@
 if [ "$ZSH_VERSION" != "" ]; then
     unset GEM_HOME
-    path=(${path[@]:#"$CONDA_PREFIX/Library/share/rubygems/bin"})
     path=(${path[@]:#"$CONDA_PREFIX/share/rubygems/bin"})
 else
     # Taken from http://www.linuxfromscratch.org/blfs/view/svn/postlfs/profile.html
@@ -19,6 +18,5 @@ else
             export $PATHVARIABLE="$NEWPATH"
     }
     unset GEM_HOME
-    pathremove "$CONDA_PREFIX/Library/share/rubygems/bin"
     pathremove "$CONDA_PREFIX/share/rubygems/bin"
 fi
