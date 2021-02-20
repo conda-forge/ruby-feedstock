@@ -2,7 +2,7 @@ setlocal enableextensions
 
 RMDIR /s /q ext\fiddle\libffi-3.2.1
 
-CALL win32\configure.bat --prefix=%LIBRARY_PREFIX%
+CALL win32\configure.bat --prefix=%PREFIX%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 nmake
@@ -11,13 +11,13 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 nmake install
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-mkdir %LIBRARY_PREFIX%\etc
+mkdir %PREFIX%\etc
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-mkdir %LIBRARY_PREFIX%\share\rubygems
+mkdir %PREFIX%\share\rubygems
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-echo "gemhome: %LIBRARY_PREFIX%/share/rubygems" > %LIBRARY_PREFIX%/etc/gemrc
+echo "gemhome: %PREFIX%/share/rubygems" > %PREFIX%/etc/gemrc
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 setlocal EnableDelayedExpansion

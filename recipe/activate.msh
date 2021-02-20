@@ -1,7 +1,2 @@
-if_(is_set("COMSPEC")).then_([
-	export("GEM_HOME", path.join(env("CONDA_PREFIX"), "Library/share/rubygems")),
-	sys.path_prepend(path.join(env("CONDA_PREFIX"), "Library/share/rubygems/bin"))
-]).else_([
-	export("GEM_HOME", path.join(env("CONDA_PREFIX"), "share/rubygems")),
-	sys.path_prepend(path.join(env("CONDA_PREFIX"), "share/rubygems/bin"))
-])
+export("GEM_HOME", path.join(env("CONDA_PREFIX"), "share/rubygems")),
+sys.path_prepend(path.join(env("CONDA_PREFIX"), "share/rubygems/bin"))
