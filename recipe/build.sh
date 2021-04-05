@@ -22,7 +22,7 @@ rm -rf ext/fiddle/libffi-3.2.1
 # Remove system Ruby on OSX
 if [ -d "/System/Library/Frameworks/Ruby.framework/" ] 
 then
-    rm -rf /System/Library/Frameworks/Ruby.framework
+    sudo rm -rf /System/Library/Frameworks/Ruby.framework
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
