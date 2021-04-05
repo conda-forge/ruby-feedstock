@@ -19,15 +19,55 @@ export LD=$(basename $LD)
 # Remove vendored libffi
 rm -rf ext/fiddle/libffi-3.2.1
 
-# Remove system Ruby on OSX
-if [ -d "/System/Library/Frameworks/Ruby.framework/" ] 
-then
-    sudo rm -rf /System/Library/Frameworks/Ruby.framework
-fi
-
 if [[ "$(uname)" == "Darwin" ]]; then
     # ensure that osx-64 uses libtool instead of ar
     export AR="${LIBTOOL}"
+fi
+
+
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
+    mkdir -p build-host
+    pushd build-host
+
+    # Store original flags
+    export CC_ORIG=$CC
+    export CXX_ORIG=$CXX
+    export LDFLAGS_ORIG=$LDFLAGS
+    export CFLAGS_ORIG=$CFLAGS
+    export CXXFLAGS_ORIG=$CXXFLAGS
+
+    export CC=$CC_FOR_BUILD
+    export CXX=$CXX_FOR_BUILD
+    export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
+
+    # Unset them as we're ok with builds that are either slow or non-portable
+    unset CFLAGS
+    unset CXXFLAGS
+
+    autoconf
+
+    ./configure \
+      --prefix="$BUILD_PREFIX" \
+      --disable-install-doc \
+      --enable-load-relative \
+      --enable-shared \
+      --with-libffi-dir="$BUILD_PREFIX" \
+      --with-libyaml-dir="$BUILD_PREFIX" \
+      --with-openssl-dir="$BUILD_PREFIX" \
+      --with-readline-dir="$BUILD_PREFIX" \
+      --with-zlib-dir="$BUILD_PREFIX"
+
+    make -j ${CPU_COUNT}
+    make install
+
+    # Restore original flags
+    export CC=$CC_ORIG
+    export CXX=$CXX_ORIG
+    export LDFLAGS=$LDFLAGS_ORIG
+    export CFLAGS=$CFLAGS_ORIG
+    export CXXFLAGS=$CXXFLAGS_ORIG
+
+    popd
 fi
 
 autoconf
