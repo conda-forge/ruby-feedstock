@@ -44,16 +44,16 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
     unset CFLAGS
     unset CXXFLAGS
 
+    # --enable-shared \
     ../configure \
       --prefix="$BUILD_PREFIX" \
       --disable-install-doc \
       --enable-load-relative \
-      # --enable-shared \
-      # --with-libffi-dir="$BUILD_PREFIX" \
-      # --with-libyaml-dir="$BUILD_PREFIX" \
-      # --with-openssl-dir="$BUILD_PREFIX" \
-      # --with-readline-dir="$BUILD_PREFIX" \
-      # --with-zlib-dir="$BUILD_PREFIX"
+      --with-libffi-dir="$BUILD_PREFIX" \
+      --with-libyaml-dir="$BUILD_PREFIX" \
+      --with-openssl-dir="$BUILD_PREFIX" \
+      --with-readline-dir="$BUILD_PREFIX" \
+      --with-zlib-dir="$BUILD_PREFIX"
 
     make -j ${CPU_COUNT}
     make install
