@@ -44,13 +44,11 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
     unset CFLAGS
     unset CXXFLAGS
 
-    autoconf
-
-    ./configure \
+    ../configure \
       --prefix="$BUILD_PREFIX" \
       --disable-install-doc \
       --enable-load-relative \
-      --enable-shared \
+      # --enable-shared \
       --with-libffi-dir="$BUILD_PREFIX" \
       --with-libyaml-dir="$BUILD_PREFIX" \
       --with-openssl-dir="$BUILD_PREFIX" \
