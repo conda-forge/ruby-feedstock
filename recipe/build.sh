@@ -53,7 +53,8 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
       --with-libyaml-dir="$BUILD_PREFIX" \
       --with-openssl-dir="$BUILD_PREFIX" \
       --with-readline-dir="$BUILD_PREFIX" \
-      --with-zlib-dir="$BUILD_PREFIX"
+      --with-zlib-dir="$BUILD_PREFIX" \
+      --with-baseruby="/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby"
 
     make -j ${CPU_COUNT}
     make install
