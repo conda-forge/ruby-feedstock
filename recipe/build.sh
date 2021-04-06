@@ -19,22 +19,16 @@ export LD=$(basename $LD)
 # Remove vendored libffi
 rm -rf ext/fiddle/libffi-3.2.1
 
-if [[ "$(uname)" == "Darwin" ]]; then
-    # ensure that osx-64 uses libtool instead of ar
+if [[ "$target_platform" == osx-* ]]; then
+    # ensure that osx-* uses libtool instead of ar
     export AR="${LIBTOOL}"
 fi
 
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
+  (
     mkdir -p build-host
     pushd build-host
-
-    # Store original flags
-    export CC_ORIG=$CC
-    export CXX_ORIG=$CXX
-    export LDFLAGS_ORIG=$LDFLAGS
-    export CFLAGS_ORIG=$CFLAGS
-    export CXXFLAGS_ORIG=$CXXFLAGS
 
     export CC=$CC_FOR_BUILD
     export CXX=$CXX_FOR_BUILD
@@ -58,15 +52,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
 
     make -j ${CPU_COUNT}
     make install
-
-    # Restore original flags
-    export CC=$CC_ORIG
-    export CXX=$CXX_ORIG
-    export LDFLAGS=$LDFLAGS_ORIG
-    export CFLAGS=$CFLAGS_ORIG
-    export CXXFLAGS=$CXXFLAGS_ORIG
-
-    popd
+  )
 fi
 
 autoconf
