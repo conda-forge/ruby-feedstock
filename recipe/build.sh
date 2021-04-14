@@ -1,4 +1,7 @@
 #!/bin/bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./ext/fiddle/libffi-3.2.1
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 set -e
 set -x
 
@@ -16,9 +19,40 @@ export LD=$(basename $LD)
 # Remove vendored libffi
 rm -rf ext/fiddle/libffi-3.2.1
 
-if [[ "$(uname)" == "Darwin" ]]; then
-    # ensure that osx-64 uses libtool instead of ar
+if [[ "$target_platform" == osx-* ]]; then
+    # ensure that osx-* uses libtool instead of ar
     export AR="${LIBTOOL}"
+fi
+
+
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
+  (
+    mkdir -p build-host
+    pushd build-host
+
+    export CC=$CC_FOR_BUILD
+    export CXX=$CXX_FOR_BUILD
+    export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
+
+    # Unset them as we're ok with builds that are either slow or non-portable
+    unset CFLAGS
+    unset CXXFLAGS
+
+    # --enable-shared \
+    ../configure \
+      --host=$BUILD \
+      --prefix="$BUILD_PREFIX" \
+      --disable-install-doc \
+      --enable-load-relative \
+      --with-libffi-dir="$BUILD_PREFIX" \
+      --with-libyaml-dir="$BUILD_PREFIX" \
+      --with-openssl-dir="$BUILD_PREFIX" \
+      --with-readline-dir="$BUILD_PREFIX" \
+      --with-zlib-dir="$BUILD_PREFIX"
+
+    make -j ${CPU_COUNT}
+    make install
+  )
 fi
 
 autoconf
