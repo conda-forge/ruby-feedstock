@@ -33,14 +33,12 @@ pin_run_as_build:
     max_pin: x.x
   ncurses:
     max_pin: x.x
-  openssl:
-    max_pin: x.x.x
   readline:
     max_pin: x
   zlib:
     max_pin: x.x
 readline:
-- '8.0'
+- '8'
 target_platform:
 - linux-aarch64
 zip_keys:
