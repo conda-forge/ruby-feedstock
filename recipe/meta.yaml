@@ -16,7 +16,7 @@ source:
     - fix-isinf-redefinition-msvc.patch  # [win]
 
 build:
-  number: 4
+  number: 5
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
