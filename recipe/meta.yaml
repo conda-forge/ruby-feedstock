@@ -21,7 +21,7 @@ source:
     # - disable-backtrace-with-lines.patch
 
 build:
-  number: 2
+  number: 3
   skip: True  # [win]
   track_features:
     - rb{{ major_minor | replace(".", "") }}
