@@ -29,4 +29,4 @@ goto :EOF
 
 :start
 set GEM_HOME=
-call :removeFromPath "%CONDA_PREFIX%\Library\share\rubygems\bin"
+call :removeFromPath "%CONDA_PREFIX%\share\rubygems\bin"
