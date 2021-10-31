@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "2.7.2" %}
+{% set version = "3.0.2" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 6e5706d0d4ee4e1e2f883db9d768586b4d06567debea353c796ec45e8321c3d4
+  sha256: 5085dee0ad9f06996a8acec7ebea4a8735e6fac22f22e2d98c3f2bc3bef7e6f1
   patches:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
@@ -16,7 +16,7 @@ source:
     - fix-isinf-redefinition-msvc.patch  # [win]
 
 build:
-  number: 6
+  number: 0
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
@@ -82,7 +82,7 @@ about:
   license: BSD-2-Clause
   license_family: BSD
   license_file: COPYING
-  summary: 'A dynamic, open source programming language with a focus on simplicity and productivity.'
+  summary: A dynamic, open source programming language with a focus on simplicity and productivity.
   description: |
     A dynamic, open source programming language with a focus on simplicity and productivity.
     It has an elegant syntax that is natural to read and easy to write.
