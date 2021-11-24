@@ -33,7 +33,7 @@ requirements:
     - autoconf    # [unix]
     - automake    # [unix]
     - make        # [unix]
-    - pkg-config  # [unix]
+    - pkg-config
     # We need all host deps also in build for cross-compiling
     - gettext     # [build_platform != target_platform]
     - gmp         # [build_platform != target_platform]
@@ -47,7 +47,7 @@ requirements:
     - gdbm        # [x86 and unix]
     - gettext     # [osx]
     - gmp         # [unix]
-    - libffi      # [unix]
+    - libffi
     - ncurses     # [unix]
     - openssl
     - readline    # [unix]
@@ -69,7 +69,8 @@ test:
     - gem --version
     - ruby -e 'puts "Hi, from Ruby!"'
     - ruby -r rubygems -e 'puts "Has gems."; exit 0'
-    - ruby -r fiddle -r openssl -r readline -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'  # [unix]
+    - ruby -r fiddle -r openssl -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+    - ruby -r readline -e 'puts "Has readline."; exit 0'  # [unix]
 
     # Tests it can build libraries with native dependencies
     - cd native                        # [unix]
