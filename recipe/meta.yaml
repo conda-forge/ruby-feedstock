@@ -16,9 +16,7 @@ source:
     - fix-isinf-redefinition-msvc.patch  # [win]
 
 build:
-  number: 7
-  track_features:
-    - rb{{ major_minor | replace(".", "") }}
+  number: 8
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
   ignore_run_exports:
