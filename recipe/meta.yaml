@@ -12,7 +12,7 @@ source:
   patches:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
-    - fix-inline-redefinition-msvc.patch  # [win]
+      #- fix-inline-redefinition-msvc.patch  # [win]
     - fix-isinf-redefinition-msvc.patch  # [win]
 
 build:
