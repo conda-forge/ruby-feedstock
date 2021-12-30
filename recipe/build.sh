@@ -19,12 +19,6 @@ export LD=$(basename $LD)
 # Remove vendored libffi
 rm -rf ext/fiddle/libffi-3.2.1
 
-if [[ "$target_platform" == osx-* ]]; then
-    # ensure that osx-* uses libtool instead of ar
-    export AR="${LIBTOOL}"
-fi
-
-
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
   (
     mkdir -p build-host
