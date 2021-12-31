@@ -12,7 +12,6 @@ source:
   patches:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
-      #- fix-inline-redefinition-msvc.patch  # [win]
     - fix-isinf-redefinition-msvc.patch  # [win]
     - 0001-Dont-t-add-SDKROOT-to-vals.patch
 
