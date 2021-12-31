@@ -52,7 +52,7 @@ fi
 autoconf
 
 ./configure \
-  --prefix="$PREFIX" \
+  --prefix="${PREFIX}" \
   --disable-install-doc \
   --enable-load-relative \
   --enable-shared \
