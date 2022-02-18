@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 c_compiler:
 - clang
 c_compiler_version:
-- '11'
+- '12'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '12'
 gmp:
 - '6'
 libffi:
@@ -21,15 +21,13 @@ libffi:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 ncurses:
-- '6.2'
+- '6'
 openssl:
 - '3'
 pin_run_as_build:
   gmp:
     max_pin: x
   libffi:
-    max_pin: x.x
-  ncurses:
     max_pin: x.x
   readline:
     max_pin: x
