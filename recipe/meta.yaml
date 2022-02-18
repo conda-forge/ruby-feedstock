@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "3.1.0" %}
+{% set version = "3.1.1" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 50a0504c6edcb4d61ce6b8cfdbddaa95707195fab0ecd7b5e92654b2a9412854
+  sha256: fe6e4782de97443978ddba8ba4be38d222aa24dc3e3f02a6a8e7701c0eeb619d
   patches:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
@@ -16,7 +16,7 @@ source:
     - 0001-Dont-t-add-SDKROOT-to-vals.patch
 
 build:
-  number: 1
+  number: 0
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
