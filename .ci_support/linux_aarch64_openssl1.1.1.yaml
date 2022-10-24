@@ -26,15 +26,6 @@ ncurses:
 - '6'
 openssl:
 - 1.1.1
-pin_run_as_build:
-  gmp:
-    max_pin: x
-  libffi:
-    max_pin: x.x
-  readline:
-    max_pin: x
-  zlib:
-    max_pin: x.x
 readline:
 - '8'
 target_platform:
