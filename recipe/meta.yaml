@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "3.1.2" %}
+{% set version = "3.2.1" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 61843112389f02b735428b53bb64cf988ad9fb81858b8248e22e57336f24a83e
+  sha256: 13d67901660ee3217dbd9dd56059346bd4212ce64a69c306ef52df64935f8dbd
   patches:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
