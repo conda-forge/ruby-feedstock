@@ -1,4 +1,4 @@
-if [ "$ZSH_VERSION" != "" ]; then
+if [ -n "${ZSH_VERSION:+x}" ]; then
     unset GEM_HOME
     path=(${path[@]:#"$CONDA_PREFIX/share/rubygems/bin"})
 else
