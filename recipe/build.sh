@@ -15,9 +15,6 @@ export AR=$(basename $AR)
 export RANLIB=$(basename $RANLIB)
 export LD=$(basename $LD)
 
-# Remove vendored libffi
-rm -rf ext/fiddle/libffi-3.2.1
-
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
   (
     mkdir -p build-host
