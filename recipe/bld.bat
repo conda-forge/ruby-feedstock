@@ -1,7 +1,5 @@
 setlocal enableextensions
 
-RMDIR /s /q ext\fiddle\libffi-3.2.1
-
 CALL win32\configure.bat --prefix=%PREFIX%
 if %errorlevel% neq 0 exit /b %errorlevel%
 

@@ -1,0 +1,14 @@
+diff --git a/process.c b/process.c
+index dbe2be5..212e81e 100644
+--- a/process.c
++++ b/process.c
+@@ -315,6 +315,9 @@ typedef unsigned LONG_LONG unsigned_clock_t;
+ #ifndef HAVE_SIG_T
+ typedef void (*sig_t) (int);
+ #endif
++#if defined(__MACH__)
++typedef int clockid_t;
++#endif
+
+ #define id_exception idException
+ static ID id_in, id_out, id_err, id_pid, id_uid, id_gid;
