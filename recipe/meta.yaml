@@ -50,8 +50,8 @@ requirements:
     - libffi
     - ncurses     # [unix]
     - openssl
-    - readline    # [unix]
-    - yaml        # [unix]
+    - readline    # [unix or win]
+    - yaml        # [unix or win]
     - zlib
   run:
     - gettext     # [osx]
