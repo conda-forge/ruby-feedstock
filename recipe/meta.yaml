@@ -17,7 +17,7 @@ source:
     - clockid_t.patch  # [osx and x86]
 
 build:
-  number: 0
+  number: 1
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
@@ -39,6 +39,7 @@ requirements:
     - gettext     # [build_platform != target_platform]
     - gmp         # [build_platform != target_platform]
     - libffi      # [build_platform != target_platform]
+    - libxcrypt   # [build_platform != target_platform]
     - ncurses     # [build_platform != target_platform]
     - openssl     # [build_platform != target_platform]
     - readline    # [build_platform != target_platform]
@@ -49,6 +50,7 @@ requirements:
     - gettext     # [osx]
     - gmp         # [unix]
     - libffi
+    - libxcrypt   # [linux]
     - ncurses     # [unix]
     - openssl
     - readline    # [unix]
