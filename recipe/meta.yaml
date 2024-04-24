@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "3.2.2" %}
+{% set version = "3.3.1" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 96c57558871a6748de5bc9f274e93f4b5aad06cd8f37befa0e8d94e7b8a423bc
+  sha256: 8dc2af2802cc700cd182d5430726388ccf885b3f0a14fcd6a0f21ff249c9aa99
   patches:
     # Patches/work-arounds for passing make check
     - disable-backtrace-with-lines.patch
@@ -17,7 +17,7 @@ source:
     - clockid_t.patch  # [osx and x86]
 
 build:
-  number: 1
+  number: 0
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
@@ -30,6 +30,7 @@ requirements:
   build:
     - gnuconfig  # [unix]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - autoconf    # [unix]
     - automake    # [unix]
