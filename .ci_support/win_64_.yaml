@@ -1,5 +1,7 @@
 c_compiler:
 - vs2019
+c_stdlib:
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -10,7 +12,9 @@ libffi:
 - '3.4'
 openssl:
 - '3'
+rust_compiler:
+- rust
 target_platform:
 - win-64
 zlib:
-- '1.2'
+- '1'
