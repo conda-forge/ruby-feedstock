@@ -31,16 +31,8 @@ requirements:
     - automake    # [unix]
     - make        # [unix]
     - pkg-config
-    # We need all host deps also in build for cross-compiling
-    - gettext     # [build_platform != target_platform]
-    - gmp         # [build_platform != target_platform]
-    - libffi      # [build_platform != target_platform]
-    - libxcrypt   # [build_platform != target_platform]
-    - ncurses     # [build_platform != target_platform]
-    - openssl     # [build_platform != target_platform]
-    - readline    # [build_platform != target_platform]
-    - yaml        # [build_platform != target_platform]
-    - zlib        # [build_platform != target_platform]
+    # depend on an old version of itself
+    - ruby 3.2.*
   host:
     - gdbm        # [x86 and unix]
     - gettext     # [osx]
