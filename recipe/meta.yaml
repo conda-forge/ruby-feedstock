@@ -14,7 +14,6 @@ source:
     - disable-backtrace-with-lines.patch
     - fix-isinf-redefinition-msvc.patch  # [win]
     - 0001-Dont-t-add-SDKROOT-to-vals.patch
-    - clockid_t.patch  # [osx and x86]
 
 build:
   number: 2
