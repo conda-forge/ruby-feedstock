@@ -5,6 +5,9 @@ set -x
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 
+# install an old version of ruby
+mamba install "ruby=3.2.*"
+
 autoconf
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then

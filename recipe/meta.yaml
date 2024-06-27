@@ -31,8 +31,6 @@ requirements:
     - automake    # [unix]
     - make        # [unix]
     - pkg-config
-    # depend on an old version of itself
-    - ruby 3.2.*
   host:
     - gdbm        # [x86 and unix]
     - gettext     # [osx]
