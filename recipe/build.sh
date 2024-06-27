@@ -6,7 +6,7 @@ set -x
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 
 # install an old version of ruby
-mamba install "ruby=3.2.*"
+mamba install "ruby=3.2.*" --yes
 
 autoconf
 
