@@ -8,6 +8,21 @@ cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 # install an old version of ruby
 mamba install "ruby=3.2.*" --yes
 
+# We don't want to leak the $BUILD_PREFIX into the final output
+export CC=$(basename $CC)
+export CPP=$(basename $CPP)
+export CXX=$(basename $CXX)
+export STRIP=$(basename $STRIP)
+export OBJDUMP=$(basename $OBJDUMP)
+export AS=$(basename $AS)
+export AR=$(basename $AR)
+export RANLIB=$(basename $RANLIB)
+export LD=$(basename $LD)
+
+# we have to use `llvm-nm` instead of `nm` for the ruby build
+# because of the Rust YJIT dependency
+export NM=llvm-nm
+
 autoconf
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
