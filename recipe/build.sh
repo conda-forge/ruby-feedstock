@@ -25,16 +25,6 @@ export NM=llvm-nm
 
 autoconf
 
-if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
-  if [[ $target_platform == "linux-aarch64" ]]; then
-    CARGO_BUILD_TARGET="aarch64-unknown-linux-gnu"
-  elif [[ $target_platform == "linux-ppc64le" ]]; then
-    CARGO_BUILD_TARGET="powerpc64le-unknown-linux-gnu"
-  elif [[ $target_platform == "osx-arm64" ]]; then
-    CARGO_BUILD_TARGET="aarch64-apple-darwin"
-  fi
-fi
-
 ./configure \
   --prefix="${PREFIX}" \
   --disable-install-doc \
@@ -46,13 +36,14 @@ fi
   --with-readline-dir="$PREFIX" \
   --with-zlib-dir="$PREFIX"
 
-make VERBOSE=1 -j ${CPU_COUNT}
+make -j ${CPU_COUNT}
 # make check works locally on Linux, but not on CI Nodes, issue seems related to IPv6 and closed ports
 # make check
 make install
 
 mkdir -p $PREFIX/etc
 mkdir -p $PREFIX/share/rubygems/
+ln -s "${PREFIX}/bin/ruby" "${PREFIX}/share/rubygems/ruby"
 
 echo "gemhome: ${PREFIX}/share/rubygems" > $PREFIX/etc/gemrc
 
