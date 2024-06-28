@@ -65,6 +65,7 @@ make install
 
 mkdir -p $PREFIX/etc
 mkdir -p $PREFIX/share/rubygems/
+ln -s "${PREFIX}/bin/ruby" "${PREFIX}/share/rubygems/ruby"
 
 echo "gemhome: ${PREFIX}/share/rubygems" > $PREFIX/etc/gemrc
 
