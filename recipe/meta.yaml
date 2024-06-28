@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "3.2.2" %}
+{% set version = "3.3.3" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,22 +8,17 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 96c57558871a6748de5bc9f274e93f4b5aad06cd8f37befa0e8d94e7b8a423bc
-  patches:
-    # Patches/work-arounds for passing make check
-    - disable-backtrace-with-lines.patch
-    - fix-isinf-redefinition-msvc.patch  # [win]
-    - 0001-Dont-t-add-SDKROOT-to-vals.patch
+  sha256: 83c05b2177ee9c335b631b29b8c077b4770166d02fa527f3a9f6a40d13f3cce2
 
 build:
-  number: 2
+  number: 0
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
-  ignore_run_exports:
+  ignore_run_exports_from:
     # We need CXX during build time to generate rbconfig.rb
-    - libstdcxx-ng
+    - {{ compiler('cxx') }}
 
 requirements:
   build:
@@ -31,30 +26,21 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
+    - {{ compiler("rust") }}
     - autoconf    # [unix]
     - automake    # [unix]
     - make        # [unix]
     - pkg-config
-    # We need all host deps also in build for cross-compiling
-    - gettext     # [build_platform != target_platform]
-    - gmp         # [build_platform != target_platform]
-    - libffi      # [build_platform != target_platform]
-    - libxcrypt   # [build_platform != target_platform]
-    - ncurses     # [build_platform != target_platform]
-    - openssl     # [build_platform != target_platform]
-    - readline    # [build_platform != target_platform]
-    - yaml        # [build_platform != target_platform]
-    - zlib        # [build_platform != target_platform]
   host:
     - gdbm        # [x86 and unix]
     - gettext     # [osx]
-    - gmp         # [unix]
     - libffi
     - libxcrypt   # [linux]
     - ncurses     # [unix]
-    - openssl
     - readline    # [unix]
-    - yaml        # [unix or win]
+    - gmp         # [unix]
+    - openssl
+    - yaml
     - zlib
   run:
     - gettext     # [osx]

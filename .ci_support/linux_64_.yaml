@@ -28,6 +28,8 @@ openssl:
 - '3'
 readline:
 - '8'
+rust_compiler:
+- rust
 target_platform:
 - linux-64
 zip_keys:

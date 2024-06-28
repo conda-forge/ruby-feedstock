@@ -1,49 +1,27 @@
 #!/bin/bash
-# Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 set -e
 set -x
 
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
+
+# install an old version of ruby
+mamba install "ruby=3.2.*" --yes
+
+# We don't want to leak the $BUILD_PREFIX into the final output
 export CC=$(basename $CC)
 export CPP=$(basename $CPP)
 export CXX=$(basename $CXX)
 export STRIP=$(basename $STRIP)
-export NM=$(basename $NM)
 export OBJDUMP=$(basename $OBJDUMP)
 export AS=$(basename $AS)
 export AR=$(basename $AR)
 export RANLIB=$(basename $RANLIB)
 export LD=$(basename $LD)
 
-if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
-  (
-    mkdir -p build-host
-    pushd build-host
-
-    export CC=$CC_FOR_BUILD
-    export CXX=$CXX_FOR_BUILD
-    export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
-
-    # Unset them as we're ok with builds that are either slow or non-portable
-    unset CFLAGS
-    unset CXXFLAGS
-
-    # --enable-shared \
-    ../configure \
-      --host=$BUILD \
-      --prefix="$BUILD_PREFIX" \
-      --disable-install-doc \
-      --enable-load-relative \
-      --with-libffi-dir="$BUILD_PREFIX" \
-      --with-libyaml-dir="$BUILD_PREFIX" \
-      --with-openssl-dir="$BUILD_PREFIX" \
-      --with-readline-dir="$BUILD_PREFIX" \
-      --with-zlib-dir="$BUILD_PREFIX"
-
-    make -j ${CPU_COUNT}
-    make install
-  )
-fi
+# we have to use `llvm-nm` instead of `nm` for the ruby build
+# because of the Rust YJIT dependency
+export NM=llvm-nm
 
 autoconf
 
