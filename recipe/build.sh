@@ -42,8 +42,8 @@ make -j ${CPU_COUNT}
 make install
 
 mkdir -p $PREFIX/etc
-mkdir -p $PREFIX/share/rubygems/
-ln -s "${PREFIX}/bin/ruby" "${PREFIX}/share/rubygems/ruby"
+mkdir -p $PREFIX/share/rubygems/bin/
+ln -s $PREFIX/bin/ruby $PREFIX/share/rubygems/bin/ruby
 
 echo "gemhome: ${PREFIX}/share/rubygems" > $PREFIX/etc/gemrc
 
