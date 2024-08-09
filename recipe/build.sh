@@ -6,7 +6,7 @@ set -x
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 
 # install an old version of ruby
-mamba install "ruby=3.2.*" --yes
+mamba install "ruby=3.3.*" --yes
 
 # We don't want to leak the $BUILD_PREFIX into the final output
 export CC=$(basename $CC)
