@@ -11,7 +11,7 @@ source:
   sha256: 83c05b2177ee9c335b631b29b8c077b4770166d02fa527f3a9f6a40d13f3cce2
 
 build:
-  number: 0
+  number: 1
   track_features:
     - rb{{ major_minor | replace(".", "") }}
   run_exports:
