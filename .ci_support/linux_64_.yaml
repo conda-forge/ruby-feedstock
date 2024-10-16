@@ -29,7 +29,7 @@ openssl:
 readline:
 - '8'
 ruby:
-- '2.6'
+- '*'
 rust_compiler:
 - rust
 target_platform:

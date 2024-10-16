@@ -13,7 +13,7 @@ libffi:
 openssl:
 - '3'
 ruby:
-- '2.6'
+- '*'
 rust_compiler:
 - rust
 target_platform:
