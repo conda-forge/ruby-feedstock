@@ -1,0 +1,4 @@
+# avoid conda-smithy picking up `- ruby` and thinking it needs to
+# populate separate builds based on the multi-pin in the pinning.
+ruby:
+  - "*"

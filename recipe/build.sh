@@ -6,7 +6,7 @@ set -x
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 
 # install an old version of ruby
-mamba install "ruby=3.2.*" --yes
+conda install "ruby=3.3.*" --yes
 
 # We don't want to leak the $BUILD_PREFIX into the final output
 export CC=$(basename $CC)
@@ -42,8 +42,8 @@ make -j ${CPU_COUNT}
 make install
 
 mkdir -p $PREFIX/etc
-mkdir -p $PREFIX/share/rubygems/
-ln -s "${PREFIX}/bin/ruby" "${PREFIX}/share/rubygems/ruby"
+mkdir -p $PREFIX/share/rubygems/bin/
+ln -s $PREFIX/bin/ruby $PREFIX/share/rubygems/bin/ruby
 
 echo "gemhome: ${PREFIX}/share/rubygems" > $PREFIX/etc/gemrc
 
