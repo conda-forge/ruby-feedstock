@@ -1,4 +1,7 @@
 #!/bin/bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./ext/fiddle/libffi-3.2.1
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 set -e
 set -x
 
