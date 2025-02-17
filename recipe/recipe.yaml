@@ -1,0 +1,103 @@
+context:
+  name: ruby
+  version: "3.4.2"
+  major_minor: ${{ (version | split('.'))[0:2] | join('.') }}
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://cache.ruby-lang.org/pub/ruby/${{ major_minor }}/ruby-${{ version }}.tar.gz
+  sha256: 41328ac21f2bfdd7de6b3565ef4f0dd7543354d37e96f157a1552a6bd0eb364b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler("rust") }}
+    - pkg-config
+    - if: unix
+      then:
+        - gnuconfig 
+        - autoconf   
+        - automake   
+        - make       
+  host:
+    - if: x86 and unix
+      then:
+        - gdbm
+    - if: unix
+      then:
+        - ncurses
+        - readline
+        - gmp
+    - if: linux
+      then:
+        - libxcrypt
+    - if: osx
+      then:
+        - gettext
+    - openssl
+    - yaml
+    - zlib
+    - libffi
+
+  run:
+    - if: osx
+      then: gettext
+
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound='x.x') }}
+  ignore_run_exports:
+    # We need CXX during build time to generate rbconfig.rb
+    from_package: 
+      - ${{ (compiler('cxx') | split(' '))[0] }}
+
+tests:
+  - script:
+      - cd native
+      - ruby config.rb
+      - make
+      - ruby -r ./hello.so -e 'hello'
+    files:
+      recipe:
+        - native/hello.c
+        - native/config.rb
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+        - make
+  - script:
+    - ruby --version
+    - gem --version
+    - ruby -e 'puts "Hi, from Ruby!"'
+    - ruby -r rubygems -e 'puts "Has gems."; exit 0'
+    - ruby -r fiddle -r openssl -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+    - if: unix
+      then:
+        - ruby -r readline -e 'puts "Has readline."; exit 0'
+
+about:
+  homepage: https://www.ruby-lang.org/
+  license: BSD-2-Clause
+  license_file: COPYING
+  summary: A dynamic, open source programming language with a focus on simplicity and productivity.
+  description: |
+    A dynamic, open source programming language with a focus on simplicity and productivity.
+    It has an elegant syntax that is natural to read and easy to write.
+  documentation: https://www.ruby-lang.org/en/documentation/
+  repository: https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/
+
+extra:
+  recipe-maintainers:
+    - scopatz
+    - jimmynguyc
+    - sodre
+    - wolfv
+    - xhochy
