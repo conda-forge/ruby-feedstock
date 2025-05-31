@@ -2,3 +2,7 @@
 # populate separate builds based on the multi-pin in the pinning.
 ruby:
   - "*"
+c_compiler:     # [win]
+  - vs2022      # [win]
+cxx_compiler:   # [win]
+  - vs2022      # [win]
