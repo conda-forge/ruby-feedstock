@@ -19,11 +19,11 @@ docker_image:
 gmp:
 - '6'
 libffi:
-- '3.4'
+- '3.5'
 ncurses:
 - '6'
 openssl:
-- '3'
+- '3.5'
 readline:
 - '8'
 ruby:

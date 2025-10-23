@@ -9,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2022
 libffi:
-- '3.4'
+- '3.5'
 openssl:
-- '3'
+- '3.5'
 ruby:
 - '*'
 rust_compiler:
