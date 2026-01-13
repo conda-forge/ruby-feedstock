@@ -1,5 +1,5 @@
 {% set name = "ruby" %}
-{% set version = "3.4.8" %}
+{% set version = "4.0.1" %}
 {% set major_minor = '.'.join(version.split('.')[0:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
-  sha256: 53c4ddad41fbb6189f1f5ee0db57a51d54bd1f87f8755b3d68604156a35b045b
+  sha256: 3924be2d05db30f4e35f859bf028be85f4b7dd01714142fd823e4af5de2faf9d
 
 build:
   number: 0
