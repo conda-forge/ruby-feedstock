@@ -30,6 +30,7 @@ autoconf
   --disable-install-doc \
   --enable-load-relative \
   --enable-shared \
+  --enable-dtrace=no \
   --with-libffi-dir="$PREFIX" \
   --with-libyaml-dir="$PREFIX" \
   --with-openssl-dir="$PREFIX" \

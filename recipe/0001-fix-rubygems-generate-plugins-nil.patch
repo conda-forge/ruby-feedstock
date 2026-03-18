@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: conda-forge <conda-forge@users.noreply.github.com>
+Subject: [PATCH] Fix generate_plugins crash during cross-compilation
+
+During cross-compilation, Pathname.new may fail because the target
+architecture's pathname.so extension cannot be loaded by the build
+Ruby. This causes an ArgumentError that is caught, but the rescue
+handler crashes on latest.name when latest is nil.
+
+Fix both issues: handle nil latest in rescue, and gracefully skip
+plugin generation when it fails due to incompatible extensions.
+
+diff --git a/lib/rubygems/installer.rb b/lib/rubygems/installer.rb
+--- a/lib/rubygems/installer.rb
++++ b/lib/rubygems/installer.rb
+@@ -478,7 +478,9 @@ class Gem::Installer
+       regenerate_plugins_for(spec, @plugins_dir)
+     end
+   rescue ArgumentError => e
+-    raise e, "#{latest.name} #{latest.version} #{spec.name} #{spec.version}: #{e.message}"
++    raise e, "#{latest&.name} #{latest&.version} #{spec.name} #{spec.version}: #{e.message}"
++  rescue StandardError
++    nil
+   end
+

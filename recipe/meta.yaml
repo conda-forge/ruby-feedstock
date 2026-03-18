@@ -9,6 +9,8 @@ package:
 source:
   url: https://cache.ruby-lang.org/pub/ruby/{{ major_minor }}/ruby-{{ version }}.tar.gz
   sha256: 51502b26b50b68df4963336ca41e368cde92c928faf91654de4c4c1791f82aac
+  patches:
+    - 0001-fix-rubygems-generate-plugins-nil.patch
 
 build:
   number: 0
