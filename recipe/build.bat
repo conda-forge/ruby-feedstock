@@ -9,6 +9,11 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 nmake install
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+:: Remove mkmf.log files that may contain the prefix with mixed path separators.
+:: These are build artifacts not needed at runtime, and rattler-build rejects
+:: files with both forward- and backslashes in the prefix.
+for /f "delims=" %%f in ('dir /s /b "%PREFIX%\mkmf.log" 2^>nul') do del /q "%%f"
+
 if not exist "%PREFIX%\etc" (
     mkdir "%PREFIX%\etc"
     if %errorlevel% neq 0 exit /b %errorlevel%

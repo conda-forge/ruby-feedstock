@@ -27,6 +27,8 @@ autoconf
 
 ./configure \
   --prefix="${PREFIX}" \
+  --host="${HOST}" \
+  --build="${BUILD}" \
   --disable-install-doc \
   --enable-load-relative \
   --enable-shared \
