@@ -1,0 +1,46 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: conda-forge <conda-forge@users.noreply.github.com>
+Subject: [PATCH] Fix generate_plugins crash during cross-compilation
+
+During cross-compilation, Pathname.new may fail because the target
+architecture's pathname.so extension cannot be loaded by the build
+Ruby. This causes an ArgumentError in regenerate_plugins_for.
+
+Fix by rescuing errors in regenerate_plugins_for and skipping plugin
+generation when it fails, and handle nil latest in the rescue handler
+of generate_plugins.
+
+diff --git a/lib/rubygems/installer.rb b/lib/rubygems/installer.rb
+--- a/lib/rubygems/installer.rb
++++ b/lib/rubygems/installer.rb
+@@ -478,7 +478,9 @@ class Gem::Installer
+       regenerate_plugins_for(spec, @plugins_dir)
+     end
+   rescue ArgumentError => e
+-    raise e, "#{latest.name} #{latest.version} #{spec.name} #{spec.version}: #{e.message}"
++    raise e, "#{latest&.name} #{latest&.version} #{spec.name} #{spec.version}: #{e.message}"
++  rescue StandardError
++    nil
+   end
+
+diff --git a/lib/rubygems/installer_uninstaller_utils.rb b/lib/rubygems/installer_uninstaller_utils.rb
+--- a/lib/rubygems/installer_uninstaller_utils.rb
++++ b/lib/rubygems/installer_uninstaller_utils.rb
+@@ -4,6 +4,8 @@
+ # Helper methods for both Gem::Installer and Gem::Uninstaller
+
+ module Gem::InstallerUninstallerUtils
++
++  private
+   def regenerate_plugins_for(spec, plugins_dir)
+     plugins = spec.plugins
+     return if plugins.empty?
+@@ -18,6 +20,8 @@ module Gem::InstallerUninstallerUtils
+
+       verbose plugin_script_path
+     end
++  rescue ArgumentError, LoadError
++    nil
+   end
+
+   def remove_plugins_for(spec, plugins_dir)
