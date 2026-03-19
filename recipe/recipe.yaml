@@ -1,6 +1,6 @@
 context:
   name: ruby
-  version: "3.4.4"
+  version: "4.0.2"
   major_minor: ${{ (version | split('.'))[0:2] | join('.') }}
 
 package:
@@ -9,7 +9,9 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/${{ major_minor }}/ruby-${{ version }}.tar.gz
-  sha256: a0597bfdf312e010efd1effaa8d7f1d7833146fdc17950caa8158ffa3dcbfa85
+  sha256: 51502b26b50b68df4963336ca41e368cde92c928faf91654de4c4c1791f82aac
+  patches:
+    - 0001-fix-rubygems-generate-plugins-nil.patch
 
 build:
   number: 0
@@ -17,57 +19,71 @@ build:
 requirements:
   build:
     # ruby for bootstrapping itself
-    - ruby   
-    - gnuconfig  # [unix]
+    - ruby
+    - if: unix
+      then: gnuconfig
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
     - ${{ compiler("rust") }}
-    - autoconf    # [unix]
-    - automake    # [unix]
-    - make        # [unix]
+    - if: unix
+      then:
+        - autoconf
+        - automake
+        - make
     - pkg-config
   host:
-    - gdbm        # [x86 and unix]
-    - gettext     # [osx]
+    - if: x86 and unix
+      then: gdbm
+    - if: osx
+      then: gettext
     - libffi
-    - libxcrypt   # [linux]
-    - ncurses     # [unix]
-    - readline    # [unix]
-    - gmp         # [unix]
+    - if: linux
+      then: libxcrypt
+    - if: unix
+      then:
+        - ncurses
+        - readline
+        - gmp
     - openssl
     - yaml
     - zlib
   run:
-    - gettext     # [osx]
+    - if: osx
+      then: gettext
   run_exports:
     - ${{ pin_subpackage(name, upper_bound='x.x') }}
   ignore_run_exports:
-    from_package: 
+    from_package:
       # We need CXX during build time to generate rbconfig.rb
       - ${{ compiler('cxx') }}
 
-# test:
-#   requires:
-#     - ${{ compiler('c') }}
-#     - ${{ compiler('cxx') }}
-#     - make  # [unix]
-#   files:
-#     - native/hello.c
-#     - native/config.rb
-#   commands:
-#     - ruby --version
-#     - gem --version
-#     - ruby -e 'puts "Hi, from Ruby!"'
-#     - ruby -r rubygems -e 'puts "Has gems."; exit 0'
-#     - ruby -r fiddle -r openssl -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
-#     - ruby -r readline -e 'puts "Has readline."; exit 0'  # [unix]
-
-#     # Tests it can build libraries with native dependencies
-#     - cd native                        # [unix]
-#     - ruby config.rb                   # [unix]
-#     - make                             # [unix]
-#     - ruby -r ./hello.so -e 'hello'    # [unix]
+tests:
+  - requirements:
+      run:
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+        - if: unix
+          then: make
+    files:
+      source:
+        - native/hello.c
+        - native/config.rb
+    script:
+      - ruby --version
+      - gem --version
+      - ruby -e 'puts "Hi, from Ruby!"'
+      - ruby -r rubygems -e 'puts "Has gems."; exit 0'
+      - ruby -r fiddle -r openssl -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
+      - if: unix
+        then: ruby -r readline -e 'puts "Has readline."; exit 0'
+      # Tests it can build libraries with native dependencies
+      - if: unix
+        then:
+          - cd native
+          - ruby config.rb
+          - make
+          - ruby -r ./hello.so -e 'hello'
 
 about:
   homepage: https://www.ruby-lang.org/

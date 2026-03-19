@@ -26,8 +26,6 @@ openssl:
 - '3.5'
 readline:
 - '8'
-ruby:
-- '*'
 rust_compiler:
 - rust
 target_platform:
