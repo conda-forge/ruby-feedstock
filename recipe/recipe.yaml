@@ -1,6 +1,6 @@
 context:
   name: ruby
-  version: "4.0.2"
+  version: "4.0.3"
   major_minor: ${{ (version | split('.'))[0:2] | join('.') }}
 
 package:
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/${{ major_minor }}/ruby-${{ version }}.tar.gz
-  sha256: 51502b26b50b68df4963336ca41e368cde92c928faf91654de4c4c1791f82aac
+  sha256: 77964acc370d5c8375b9502e5ba6c13c03ef91ab9eb9f521c84fb42b9c9a6b0f
   patches:
     - 0001-fix-rubygems-generate-plugins-nil.patch
 
@@ -76,15 +76,13 @@ tests:
       - ruby -r rubygems -e 'puts "Has gems."; exit 0'
       - ruby -r fiddle -r openssl -r yaml -r zlib -e 'puts "Has all dependencies."; exit 0'
       - if: unix
-        then: ruby -r readline -e 'puts "Has readline."; exit 0'
-      # Tests it can build libraries with native dependencies
-      - if: unix
         then:
+      # Tests it can build libraries with native dependencies
+          - ruby -r readline -e 'puts "Has readline."; exit 0'
           - cd native
           - ruby config.rb
           - make
           - ruby -r ./hello.so -e 'hello'
-
 about:
   homepage: https://www.ruby-lang.org/
   license: BSD-2-Clause
