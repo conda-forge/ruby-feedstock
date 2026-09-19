@@ -4,7 +4,7 @@ context:
   major_minor: ${{ (version | split('.'))[0:2] | join('.') }}
 
 package:
-  name: ${{ name|lower }}
+  name: ruby
   version: ${{ version }}
 
 source:
@@ -19,7 +19,9 @@ build:
 requirements:
   build:
     # ruby for bootstrapping itself
-    - ruby
+    - if: unix
+      then: ruby 3.3.*
+      else: ruby
     - if: unix
       then: gnuconfig
     - ${{ compiler('c') }}
