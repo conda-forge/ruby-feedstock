@@ -19,9 +19,7 @@ build:
 requirements:
   build:
     # ruby for bootstrapping itself
-    - if: unix
-      then: ruby 3.3.*
-      else: ruby
+    - ruby
     - if: unix
       then: gnuconfig
     - ${{ compiler('c') }}
