@@ -5,9 +5,6 @@ set -x
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./tool
 
-# install an old version of ruby
-conda install "ruby=3.3.*" --yes
-
 # We don't want to leak the $BUILD_PREFIX into the final output
 export CC=$(basename $CC)
 export CPP=$(basename $CPP)
