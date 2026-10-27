@@ -1,3 +1,5 @@
+DOCKER_PLATFORM:
+- linux/amd64
 c_compiler:
 - gcc
 c_compiler_version:
@@ -19,7 +21,7 @@ docker_image:
 gmp:
 - '6'
 libffi:
-- '3.5'
+- '3.7'
 ncurses:
 - '6'
 openssl:
