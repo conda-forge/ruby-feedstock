@@ -21,7 +21,7 @@ docker_image:
 gmp:
 - '6'
 libffi:
-- '3.5'
+- '3.7'
 ncurses:
 - '6'
 openssl:
