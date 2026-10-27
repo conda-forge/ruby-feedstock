@@ -1,7 +1,13 @@
+build_platform:
+  linux_riscv64: linux_64
 compiler_stack: comp7
-max_py_ver: '37'
-max_r_ver: '35'
-provider: {linux_aarch64: azure, linux_ppc64le: travis}
-conda_forge_output_validation: true
 conda_build:
   pkg_format: '2'
+conda_forge_output_validation: true
+max_py_ver: '37'
+max_r_ver: '35'
+provider:
+  linux_aarch64: azure
+  linux_ppc64le: travis
+  linux_riscv64: linux_64
+test: native_and_emulated

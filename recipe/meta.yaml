@@ -21,7 +21,7 @@ source:
     - disable-backtrace-with-lines.patch
 
 build:
-  number: 3
+  number: 4
   skip: True  # [win]
   track_features:
     - rb{{ major_minor | replace(".", "") }}
@@ -33,6 +33,7 @@ build:
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - autoconf
