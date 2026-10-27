@@ -2,9 +2,6 @@
 # populate separate builds based on the multi-pin in the pinning.
 ruby:
   - "*"
-# linux-riscv64 only has libffi 3.7; other platforms use the global pin.
-libffi:        # [linux and riscv64]
-  - "3.7"      # [linux and riscv64]
 c_compiler:     # [win]
   - vs2022      # [win]
 cxx_compiler:   # [win]
