@@ -17,7 +17,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '21'
 gettext:
-- '0.25'
+- '1'
 gmp:
 - '6'
 libffi:

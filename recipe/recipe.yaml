@@ -16,7 +16,7 @@ source:
     - 0002-load-gem-prelude-without-builtin-binary.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
