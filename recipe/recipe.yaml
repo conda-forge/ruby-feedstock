@@ -1,6 +1,6 @@
 context:
   name: ruby
-  version: "4.0.9"
+  version: "3.3.14"
   major_minor: ${{ (version | split('.'))[0:2] | join('.') }}
 
 package:
@@ -9,12 +9,12 @@ package:
 
 source:
   url: https://cache.ruby-lang.org/pub/ruby/${{ major_minor }}/ruby-${{ version }}.tar.gz
-  sha256: c35350682ff050b79702d57ade4516e7336063f510155d19fb2fb5b3f3909511
+  sha256: d0438ee291b0cacaf97c7a71df4c939d7f3265c8c2d1b8ffe27311f71fc680b0
   patches:
     - 0001-fix-rubygems-generate-plugins-nil.patch
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
