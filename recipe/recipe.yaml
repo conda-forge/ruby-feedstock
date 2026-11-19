@@ -34,7 +34,7 @@ requirements:
         - autoconf
         - automake
         - make
-    - pkg-config
+    - pkgconf
   host:
     - if: x86 and unix
       then: gdbm
