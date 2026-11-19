@@ -12,7 +12,8 @@ source:
   sha256: b53eef3371fa5d3e3b74340edcd015f06d5d8853968d4e539a5264fce41ed9f1
   patches:
     - 0001-fix-rubygems-generate-plugins-nil.patch
-    # cross-compiled ruby (no builtin binary) never loaded RubyGems
+    # cross-compiled ruby (no builtin binary) never loaded RubyGems;
+    # backport of https://github.com/ruby/ruby/pull/19609
     - 0002-load-gem-prelude-without-builtin-binary.patch
 
 build:
